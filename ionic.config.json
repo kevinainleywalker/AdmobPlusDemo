@@ -1,0 +1,7 @@
+{
+  "name": "OrientationDemo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
