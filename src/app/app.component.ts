@@ -1,5 +1,5 @@
+import { AdMobPlus, BannerAd } from '@admob-plus/capacitor';
 import { Component } from '@angular/core';
-import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Platform } from '@ionic/angular';
 
 @Component({
@@ -8,24 +8,20 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private platform: Platform, private screenOrientation: ScreenOrientation) { 
+  constructor(private platform: Platform) { 
     this.initializeApp();
   }
 
   private async initializeApp() {
     await this.platform.ready();
 
-    // get current
-    console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
+    await this.platform.ready();
+    await AdMobPlus.start();
 
-    // set to landscape
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    const banner = new BannerAd({
+      adUnitId: 'ca-app-pub-3940256099942544/6300978111'
+    });
 
-    // detect orientation changes
-    this.screenOrientation.onChange().subscribe(
-      () => {
-        console.log("Orientation Changed");
-      }
-    );
+    await banner.show();
   }
 }
