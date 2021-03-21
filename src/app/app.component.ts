@@ -14,8 +14,6 @@ export class AppComponent {
 
   private async initializeApp() {
     await this.platform.ready();
-
-    await this.platform.ready();
     await AdMobPlus.start();
 
     const banner = new BannerAd({
